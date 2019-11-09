@@ -1,5 +1,5 @@
 <template>
-  <main class="github-notes">
+  <div class="github-notes">
     <header class="main-header">
       <h1 class="main-header__title">Github notes</h1>
       <figure class="user-info">
@@ -9,12 +9,12 @@
         <figcaption class="user-info__name">Evan You</figcaption>
       </figure>
     </header>
-    <main class="main-body">
+    <div class="main-body">
       <aside class="main-sidebar">
         <ul class="file-list">
           <li>welcome.txt</li>
           <li>Lorem.txt</li>
-          <li>Ipsum.txt</li>
+          <li class="is-active">Ipsum.txt</li>
           <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
           <li>welcome.txt</li>
           <li>Lorem.txt</li>
@@ -36,20 +36,23 @@
         <button class="main-sidebar__add">Add new</button>
       </aside>
       <main class="main-content">
-        <div class="main-content__empty">Nothing selected</div>
+        <div class="file-item">
+          <div class="file-item__body">
+            <div class="file-item__header">
+              <h2 class="file-item__name">Ipsum.txt</h2>
+              <div class="file-item__buttons">
+                <button class="btn btn--negative">Delete</button>
+                <button class="btn btn--positive">Edit</button>
+              </div>
+            </div>
+            <div class="file-item__content">
+              <pre>
+                &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+              </pre>
+            </div>
+          </div>
+        </div>
       </main>
-    </main>
-  </main>
+    </div>
+  </div>
 </template>
-
-<script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue';
-
-export default {
-  name: 'home',
-  components: {
-    // HelloWorld
-  }
-}
-</script>
