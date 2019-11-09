@@ -2,26 +2,7 @@
   <main class="main-body">
     <aside class="main-sidebar">
       <ul class="file-list">
-        <li>welcome.txt</li>
-        <li>Lorem.txt</li>
-        <li>Ipsum.txt</li>
-        <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
-        <li>welcome.txt</li>
-        <li>Lorem.txt</li>
-        <li>Ipsum.txt</li>
-        <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
-        <li>welcome.txt</li>
-        <li>Lorem.txt</li>
-        <li>Ipsum.txt</li>
-        <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
-        <li>welcome.txt</li>
-        <li>Lorem.txt</li>
-        <li>Ipsum.txt</li>
-        <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
-        <li>welcome.txt</li>
-        <li>Lorem.txt</li>
-        <li>Ipsum.txt</li>
-        <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
+        <li v-bind:key="name" v-for="(value, name) in gist.files">{{name}}</li>
       </ul>
       <button class="main-sidebar__add">Add new</button>
     </aside>
@@ -32,12 +13,18 @@
 </template>
 
 <script>
-import api from '../api/gist-api'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'home',
   created () {
-    api.getGists()
+    this.getGists()
+  },
+  methods: {
+    ...mapActions(['getGists'])
+  },
+  computed: {
+    ...mapState(['gist'])
   }
 }
 </script>

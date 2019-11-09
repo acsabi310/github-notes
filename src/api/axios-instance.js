@@ -2,11 +2,15 @@ import axios from 'axios'
 import router from '../router'
 import AccessTokenService from '../services/access-token.service'
 
-axios.interceptors.request.use(
+if (!window.axios) {
+  window.axios = axios
+}
+
+window.axios.interceptors.request.use(
   request => requestHandler(request)
 )
 
-axios.interceptors.response.use(
+window.axios.interceptors.response.use(
   response => responseHandler(response),
   error => errorResponseHandler(error)
 )
@@ -22,7 +26,7 @@ function requestHandler (request) {
 }
 
 function responseHandler (response) {
-  Promise.resolve(response)
+  return Promise.resolve(response)
 }
 
 function errorResponseHandler (error) {
@@ -32,4 +36,4 @@ function errorResponseHandler (error) {
   Promise.reject(error)
 }
 
-export default axios
+export default window.axios
