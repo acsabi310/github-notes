@@ -32,13 +32,12 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue';
+import api from '../api/gist-api'
 
 export default {
   name: 'home',
-  components: {
-    // HelloWorld
+  created () {
+    api.getGists()
   }
 }
 </script>

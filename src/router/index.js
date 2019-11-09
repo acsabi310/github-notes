@@ -27,6 +27,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "edit" */ '../views/Edit.vue')
   },
   {
+    path: '/add-access-token',
+    name: 'add-access-token',
+    component: () => import(/* webpackChunkName: "edit" */ '../views/AccessToken.vue')
+  },
+  {
     path: '*',
     name: '404',
     component: NotFound
