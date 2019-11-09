@@ -1,7 +1,6 @@
 import axios from 'axios'
 import router from '../router'
-
-const accessToken = 'teszt'
+import AccessTokenService from '../services/access-token.service'
 
 axios.interceptors.request.use(
   request => requestHandler(request)
@@ -13,6 +12,7 @@ axios.interceptors.response.use(
 )
 
 function requestHandler (request) {
+  let accessToken = AccessTokenService.getAccessToken()
   if (accessToken) {
     request.headers['Authorization'] = `token ${accessToken}`
     return request
