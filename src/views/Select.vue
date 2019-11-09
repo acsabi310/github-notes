@@ -1,58 +1,47 @@
 <template>
-  <div class="github-notes">
-    <header class="main-header">
-      <h1 class="main-header__title">Github notes</h1>
-      <figure class="user-info">
-        <picture class="user-info__avatar">
-          <img src="https://avatars1.githubusercontent.com/u/499550?v=4" alt="Profile picture" />
-        </picture>
-        <figcaption class="user-info__name">Evan You</figcaption>
-      </figure>
-    </header>
-    <div class="main-body">
-      <aside class="main-sidebar">
-        <ul class="file-list">
-          <li>welcome.txt</li>
-          <li>Lorem.txt</li>
-          <li class="is-active">Ipsum.txt</li>
-          <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
-          <li>welcome.txt</li>
-          <li>Lorem.txt</li>
-          <li>Ipsum.txt</li>
-          <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
-          <li>welcome.txt</li>
-          <li>Lorem.txt</li>
-          <li>Ipsum.txt</li>
-          <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
-          <li>welcome.txt</li>
-          <li>Lorem.txt</li>
-          <li>Ipsum.txt</li>
-          <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
-          <li>welcome.txt</li>
-          <li>Lorem.txt</li>
-          <li>Ipsum.txt</li>
-          <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
-        </ul>
-        <button class="main-sidebar__add">Add new</button>
-      </aside>
-      <main class="main-content">
-        <div class="file-item">
-          <div class="file-item__body">
-            <div class="file-item__header">
-              <h2 class="file-item__name">Ipsum.txt</h2>
-              <div class="file-item__buttons">
-                <button class="btn btn--negative">Delete</button>
-                <button class="btn btn--positive">Edit</button>
-              </div>
-            </div>
-            <div class="file-item__content">
-              <pre>
-                &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
-              </pre>
+  <div class="main-body">
+    <aside class="main-sidebar">
+      <ul class="file-list">
+        <li>welcome.txt</li>
+        <li>Lorem.txt</li>
+        <li class="is-active">Ipsum.txt</li>
+        <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
+        <li>welcome.txt</li>
+        <li>Lorem.txt</li>
+        <li>Ipsum.txt</li>
+        <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
+        <li>welcome.txt</li>
+        <li>Lorem.txt</li>
+        <li>Ipsum.txt</li>
+        <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
+        <li>welcome.txt</li>
+        <li>Lorem.txt</li>
+        <li>Ipsum.txt</li>
+        <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
+        <li>welcome.txt</li>
+        <li>Lorem.txt</li>
+        <li>Ipsum.txt</li>
+        <li>2_hu_18bef50f3e4061f6ec800e02f1709f80__9IQ25DOQMBNGRB74_.log</li>
+      </ul>
+      <button class="main-sidebar__add">Add new</button>
+    </aside>
+    <main class="main-content">
+      <div class="file-item">
+        <div class="file-item__body">
+          <div class="file-item__header">
+            <h2 class="file-item__name">Ipsum.txt</h2>
+            <div class="file-item__buttons">
+              <button class="btn btn--negative">Delete</button>
+              <button class="btn btn--positive">Edit</button>
             </div>
           </div>
+          <div class="file-item__content">
+            <pre>
+                &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+              </pre>
+          </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   </div>
 </template>
