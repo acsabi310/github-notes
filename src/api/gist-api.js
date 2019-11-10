@@ -10,5 +10,9 @@ export default {
 
   createGist (data) {
     return axiosInstance.post(BASE_URL, data)
+  },
+
+  saveFileToGist (gistId, requestData) {
+    return axiosInstance.patch(`${BASE_URL}/${gistId}`, requestData)
   }
 }

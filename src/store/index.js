@@ -61,6 +61,16 @@ export default new Vuex.Store({
     storeGistData ({ commit }, { owner, gist }) {
       commit(GIST, gist)
       commit(OWNER, owner)
+    },
+
+    saveFileToGist ({ state }, fileData) {
+      return new Promise((resolve, reject) => {
+        const { id } = state.gist
+        const requestData = {
+          files: { ...fileData }
+        }
+        api.saveFileToGist(id, requestData).then(() => { resolve() }).catch(error => { reject(error) })
+      })
     }
 
   },
