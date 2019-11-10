@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 const GIST = 'gist'
 const OWNER = 'owner'
+const ERROR = 'error'
 
 const GIST_DESCRIPTION = 'Created by Github Notes'
 
@@ -29,7 +30,8 @@ export default new Vuex.Store({
     owner: {
       avatar_url: '',
       login: ''
-    }
+    },
+    error: false
   },
   mutations: {
     [GIST] (state, data) {
@@ -37,11 +39,15 @@ export default new Vuex.Store({
     },
     [OWNER] (state, owner) {
       state.owner = { ...owner }
+    },
+    [ERROR] (state, value) {
+      state.error = value
     }
   },
   actions: {
     async getGists ({ dispatch }) {
       const response = await api.getGists()
+      if (!response) return
       const gist = response.data.find(gist => gist.description === GIST_DESCRIPTION)
       if (gist) {
         const { owner } = gist
@@ -71,6 +77,10 @@ export default new Vuex.Store({
         }
         api.saveFileToGist(id, requestData).then(() => { resolve() }).catch(error => { reject(error) })
       })
+    },
+
+    setError ({ commit }, value) {
+      commit(ERROR, value)
     }
 
   },

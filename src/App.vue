@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="github-notes">
+    <ErrorBadge></ErrorBadge>
     <HeaderComponent></HeaderComponent>
     <router-view />
   </div>
@@ -11,10 +12,12 @@
 
 <script>
 import HeaderComponent from './components/Header.vue'
+import ErrorBadge from './components/ErrorBadge.vue'
 
 export default {
   components: {
-    HeaderComponent
+    HeaderComponent,
+    ErrorBadge
   }
 }
 </script>

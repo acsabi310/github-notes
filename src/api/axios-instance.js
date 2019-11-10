@@ -1,5 +1,6 @@
 import axios from 'axios'
 import router from '../router'
+import store from '../store'
 import AccessTokenService from '../services/access-token.service'
 
 if (!window.axios) {
@@ -33,7 +34,8 @@ function errorResponseHandler (error) {
   if (error.response.status === 401) {
     router.push('add-access-token')
   }
-  Promise.reject(error)
+  store.dispatch('setError', true)
+  return Promise.reject(error)
 }
 
 export default window.axios
