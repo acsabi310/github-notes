@@ -6,6 +6,7 @@ import api from '../api/gist-api'
 Vue.use(Vuex)
 
 const GIST = 'gist'
+const GIST_ID = 'gistId'
 const OWNER = 'owner'
 const ERROR = 'error'
 
@@ -23,6 +24,7 @@ const TEMPLATE_NEW_GIST = {
 
 export default new Vuex.Store({
   state: {
+    gistId: '',
     gist: {
       description: '',
       files: {}
@@ -42,19 +44,37 @@ export default new Vuex.Store({
     },
     [ERROR] (state, value) {
       state.error = value
+    },
+    [GIST_ID] (state, value) {
+      state.gistId = value
     }
   },
   actions: {
-    async getGists ({ dispatch }) {
+    init ({ dispatch, state }) {
+      if (state.gistId) {
+        dispatch('getGist', state.gistId)
+      } else {
+        dispatch('getGists')
+      }
+    },
+
+    async getGists ({ commit, dispatch }) {
       const response = await api.getGists()
       if (!response) return
       const gist = response.data.find(gist => gist.description === GIST_DESCRIPTION)
       if (gist) {
-        const { owner } = gist
-        dispatch('storeGistData', { owner, gist })
+        commit(GIST_ID, gist.id)
+        dispatch('getGist', gist.id)
       } else {
         dispatch('createGist')
       }
+    },
+
+    async getGist ({ dispatch }, id) {
+      const response = await api.getGist(id)
+      const gist = response.data
+      const { owner } = gist
+      dispatch('storeGistData', { owner, gist })
     },
 
     async createGist ({ dispatch }) {
@@ -75,12 +95,22 @@ export default new Vuex.Store({
         const requestData = {
           files: { ...fileData }
         }
-        api.saveFileToGist(id, requestData).then(() => { resolve() }).catch(error => { reject(error) })
+        api.patchGist(id, requestData).then(() => { resolve() }).catch(error => { reject(error) })
       })
     },
 
     setError ({ commit }, value) {
       commit(ERROR, value)
+    },
+
+    deleteFileFromGist ({ state }, fileName) {
+      return new Promise((resolve, reject) => {
+        const { id } = state.gist
+        const requestData = {
+          files: { [fileName]: null }
+        }
+        api.patchGist(id, requestData).then(() => { resolve() }).catch(error => { reject(error) })
+      })
     }
 
   },

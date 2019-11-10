@@ -2,7 +2,7 @@
   <main class="main-body">
     <aside class="main-sidebar">
       <ul class="file-list">
-        <li v-bind:key="name" v-for="(value, name) in gist.files">{{name}}</li>
+        <li v-bind:key="name" v-for="(value, name) in gist.files" @click="navigateToFile(name)">{{name}}</li>
       </ul>
       <router-link to="create">
         <button class="main-sidebar__add">Add new</button>
@@ -20,10 +20,13 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'home',
   created () {
-    this.getGists()
+    this.init()
   },
   methods: {
-    ...mapActions(['getGists'])
+    ...mapActions(['init']),
+    navigateToFile (filename) {
+      this.$router.push(`/files/${filename}`)
+    }
   },
   computed: {
     ...mapState(['gist'])
