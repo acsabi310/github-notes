@@ -2,6 +2,16 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import NotFound from '../views/404.vue'
+import store from '../store'
+
+const beforeEnterGuard = (to, from, next) => {
+  console.log(store.state.gistId)
+  if (!store.state.gistId) {
+    next('/')
+  } else {
+    next()
+  }
+}
 
 Vue.use(VueRouter)
 
@@ -14,17 +24,20 @@ const routes = [
   {
     path: '/create',
     name: 'create',
-    component: () => import(/* webpackChunkName: "create" */ '../views/Create.vue')
+    component: () => import(/* webpackChunkName: "create" */ '../views/Create.vue'),
+    beforeEnter: beforeEnterGuard
   },
   {
     path: '/files/:filename',
     name: 'select',
-    component: () => import(/* webpackChunkName: "edit" */ '../views/Select.vue')
+    component: () => import(/* webpackChunkName: "edit" */ '../views/Select.vue'),
+    beforeEnter: beforeEnterGuard
   },
   {
     path: '/files/:filename/edit',
     name: 'edit',
-    component: () => import(/* webpackChunkName: "edit" */ '../views/Edit.vue')
+    component: () => import(/* webpackChunkName: "edit" */ '../views/Edit.vue'),
+    beforeEnter: beforeEnterGuard
   },
   {
     path: '/add-access-token',

@@ -19,11 +19,11 @@
             <h2 class="file-item__name">{{fileName}}</h2>
             <div class="file-item__buttons">
               <button class="btn btn--negative" @click="deleteFile()">Delete</button>
-              <button class="btn btn--positive">Edit</button>
+              <button class="btn btn--positive" @click="editFile()">Edit</button>
             </div>
           </div>
           <div class="file-item__content">
-            <pre v-html="content"></pre>
+            <pre v-text="content"></pre>
           </div>
         </div>
       </div>
@@ -54,13 +54,16 @@ export default {
       this.$router.push(`/files/${filename}`)
       this.getPageData()
     },
-    async getPageData () {
+    getPageData () {
       this.fileName = this.$route.params.filename
       this.content = this.gist.files[this.fileName].content
     },
     async deleteFile () {
       await this.deleteFileFromGist(this.fileName)
       this.$router.push('/')
+    },
+    editFile () {
+      this.$router.push(`/files/${this.fileName}/edit`)
     }
   }
 }

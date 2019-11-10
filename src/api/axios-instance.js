@@ -22,7 +22,7 @@ function requestHandler (request) {
     request.headers['Authorization'] = `token ${accessToken}`
     return request
   } else {
-    router.push('add-access-token')
+    router.push('/add-access-token')
   }
 }
 
@@ -31,11 +31,15 @@ function responseHandler (response) {
 }
 
 function errorResponseHandler (error) {
-  if (error.response.status === 401) {
-    router.push('add-access-token')
-  }
   store.dispatch('setError', true)
-  return Promise.reject(error)
+  if (error.response && error.response.status === 401) {
+    router.push('/add-access-token')
+    return Promise.reject(error.response)
+  } else if (error.request) {
+    return Promise.reject(error.request)
+  } else {
+    return Promise.reject(error.message)
+  }
 }
 
 export default window.axios

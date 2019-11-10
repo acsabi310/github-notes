@@ -2,7 +2,7 @@
   <div class="main-body">
     <div class="file-edit">
       <h2 class="file-edit__name">
-        <input type="text" placeholder="filename.ext" v-model.trim="$v.filename.$model" autofocus/>
+        <input type="text" placeholder="filename.ext" v-model.trim="$v.fileName.$model" autofocus/>
       </h2>
       <textarea class="file-edit__content" v-model="$v.content.$model"></textarea>
       <div class="file-edit__buttons">
@@ -20,12 +20,12 @@ export default {
   name: 'create',
   data () {
     return {
-      filename: '',
+      fileName: '',
       content: ''
     }
   },
   validations: {
-    filename: { required, maxLength: maxLength(255) },
+    fileName: { required, maxLength: maxLength(255) },
     content: { required }
   },
   methods: {
@@ -33,7 +33,7 @@ export default {
     async saveFile () {
       if (!this.$v.$invalid) {
         await this.saveFileToGist({
-          [this.filename]: {
+          [this.fileName]: {
             content: this.content
           }
         })

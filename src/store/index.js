@@ -77,10 +77,11 @@ export default new Vuex.Store({
       dispatch('storeGistData', { owner, gist })
     },
 
-    async createGist ({ dispatch }) {
+    async createGist ({ commit, dispatch }) {
       const response = await api.createGist(TEMPLATE_NEW_GIST)
       const gist = response.data
       const { owner } = gist
+      commit(GIST_ID, gist.id)
       dispatch('storeGistData', { owner, gist })
     },
 
