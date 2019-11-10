@@ -6,5 +6,9 @@ export default {
 
   getGists () {
     return axiosInstance.get(BASE_URL)
+  },
+
+  createGist (data) {
+    return axiosInstance.post(BASE_URL, data)
   }
 }

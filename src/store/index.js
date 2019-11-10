@@ -5,8 +5,20 @@ import api from '../api/gist-api'
 
 Vue.use(Vuex)
 
-const GET_GISTS = 'gist'
+const GIST = 'gist'
 const OWNER = 'owner'
+
+const GIST_DESCRIPTION = 'Created by Github Notes'
+
+const TEMPLATE_NEW_GIST = {
+  description: GIST_DESCRIPTION,
+  public: true,
+  files: {
+    'welcome.txt': {
+      content: 'Welcome!'
+    }
+  }
+}
 
 export default new Vuex.Store({
   state: {
@@ -20,7 +32,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    [GET_GISTS] (state, data) {
+    [GIST] (state, data) {
       state.gist = { ...data }
     },
     [OWNER] (state, owner) {
@@ -28,11 +40,26 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async getGists ({ commit }) {
+    async getGists ({ dispatch }) {
       const response = await api.getGists()
-      // TODO filter description "Created by Github Notes" - WIP
-      const { owner } = response.data[0]
-      commit(GET_GISTS, response.data[0])
+      const gist = response.data.find(gist => gist.description === GIST_DESCRIPTION)
+      if (gist) {
+        const { owner } = gist
+        dispatch('storeGistData', { owner, gist })
+      } else {
+        dispatch('createGist')
+      }
+    },
+
+    async createGist ({ dispatch }) {
+      const response = await api.createGist(TEMPLATE_NEW_GIST)
+      const gist = response.data
+      const { owner } = gist
+      dispatch('storeGistData', { owner, gist })
+    },
+
+    storeGistData ({ commit }, { owner, gist }) {
+      commit(GIST, gist)
       commit(OWNER, owner)
     }
 
