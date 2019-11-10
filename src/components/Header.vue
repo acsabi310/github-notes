@@ -1,6 +1,8 @@
 <template>
   <header class="main-header">
-    <h1 class="main-header__title">Github notes</h1>
+    <router-link to="/">
+      <h1 class="main-header__title">Github notes</h1>
+    </router-link>
     <figure class="user-info">
       <picture class="user-info__avatar" v-if="owner.avatar_url">
         <img :src="owner.avatar_url" alt="Profile picture" />
@@ -20,3 +22,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.main-header a {
+  text-decoration: none;
+  color: white;
+}
+</style>

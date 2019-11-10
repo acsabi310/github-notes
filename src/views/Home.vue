@@ -4,7 +4,9 @@
       <ul class="file-list">
         <li v-bind:key="name" v-for="(value, name) in gist.files">{{name}}</li>
       </ul>
-      <button class="main-sidebar__add">Add new</button>
+      <router-link to="create">
+        <button class="main-sidebar__add">Add new</button>
+      </router-link>
     </aside>
     <main class="main-content">
       <div class="main-content__empty">Nothing selected</div>
