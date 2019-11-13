@@ -9,6 +9,7 @@ const GIST = 'gist'
 const GIST_ID = 'gistId'
 const OWNER = 'owner'
 const ERROR = 'error'
+const IS_LOADING = 'isLoading'
 
 const GIST_DESCRIPTION = 'Created by Github Notes'
 
@@ -33,7 +34,8 @@ export default new Vuex.Store({
       avatar_url: '',
       login: ''
     },
-    error: false
+    error: false,
+    isLoading: false
   },
   mutations: {
     [GIST] (state, data) {
@@ -47,6 +49,9 @@ export default new Vuex.Store({
     },
     [GIST_ID] (state, value) {
       state.gistId = value
+    },
+    [IS_LOADING] (state, value) {
+      state.isLoading = value
     }
   },
   actions: {
@@ -102,6 +107,10 @@ export default new Vuex.Store({
 
     setError ({ commit }, value) {
       commit(ERROR, value)
+    },
+
+    setIsLoading ({ commit }, value) {
+      commit(IS_LOADING, value)
     },
 
     deleteFileFromGist ({ state }, fileName) {

@@ -17,6 +17,7 @@ window.axios.interceptors.response.use(
 )
 
 function requestHandler (request) {
+  store.dispatch('setIsLoading', true)
   let accessToken = AccessTokenService.getAccessToken()
   if (accessToken) {
     request.headers['Authorization'] = `token ${accessToken}`
@@ -27,10 +28,16 @@ function requestHandler (request) {
 }
 
 function responseHandler (response) {
+  setTimeout(() => {
+    store.dispatch('setIsLoading', false)
+  }, 500)
   return Promise.resolve(response)
 }
 
 function errorResponseHandler (error) {
+  setTimeout(() => {
+    store.dispatch('setIsLoading', false)
+  }, 500)
   store.dispatch('setError', true)
   if (error.response && error.response.status === 401) {
     router.push('/add-access-token')

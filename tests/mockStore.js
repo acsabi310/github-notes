@@ -13,7 +13,8 @@ export const initState = {
     avatar_url: '',
     login: ''
   },
-  error: false
+  error: false,
+  isLoading: false
 }
 
 export const mockOwner = {
